@@ -36,27 +36,27 @@ function Class:extend(t)
 	---
 	-- rewrite the method in a closure and export the super's method in the function context
 	local _supero = self
-    for k,v in pairs(t) do
-        if type(t[k]) == "function" then 
+        for k,v in pairs(t) do
+            if type(t[k]) == "function" then 
         	local tempfunc = t[k];
     		if _supero[k] and type(_supero[k]) == "function" then
-				NewClass[k] = function(that,...)
-					that._super = _supero[k]
-					ret = tempfunc(that,unpack(arg))
-					that._super = nil
-					return ret
+			NewClass[k] = function(that,...)
+				that._super = _supero[k]
+				ret = tempfunc(that,unpack(arg))
+				that._super = nil
+				return ret
+			end
+		else
+			NewClass[k] = function(that,...)
+				that._super = function(them,...) 
 				end
-			else
-				NewClass[k] = function(that,...)
-					that._super = function(them,...) 
-					end
-					ret = tempfunc(that,unpack(arg))
-					that._super = nil
-					return ret
-				end
-			end  	
+				ret = tempfunc(that,unpack(arg))
+				that._super = nil
+				return ret
+			end
+		end  	
+            end
         end
-    end
 	
 	return NewClass
 end
