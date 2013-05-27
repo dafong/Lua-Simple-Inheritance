@@ -41,17 +41,19 @@ function Class:extend(t)
         	local tempfunc = t[k];
     		if _supero[k] and type(_supero[k]) == "function" then
 			NewClass[k] = function(that,...)
+				local s = that._super
 				that._super = _supero[k]
 				ret = tempfunc(that,unpack(arg))
-				that._super = nil
+				that._super = s
 				return ret
 			end
 		else
 			NewClass[k] = function(that,...)
+				local s = that._super
 				that._super = function(them,...) 
 				end
 				ret = tempfunc(that,unpack(arg))
-				that._super = nil
+				that._super = s
 				return ret
 			end
 		end  	
