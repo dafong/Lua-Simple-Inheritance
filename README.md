@@ -1,7 +1,7 @@
 # Simple Inheritance Of Lua
 ## A lua version like JR's simple-inheritance in javascript
 ## By fanxl 
- http://confluence.redatoms.net/pages/viewpage.action?pageId=5013621
+http://www.hippyless.com/blog/?p=9
 ## MIT Licensed
 
 # Example
